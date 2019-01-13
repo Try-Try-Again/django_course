@@ -359,7 +359,11 @@ def home(request):
 
 26. add an optional arg to the about function to test thie optional title
 
+!fire up the server and test to see if it works
+
 TIME - 20:00
+
+* template inheritence allows you to 
  _____ ___    ____   ___    
 |_   _/ _ \  |  _ \ / _ \ _ 
   | || | | | | | | | | | (_)
