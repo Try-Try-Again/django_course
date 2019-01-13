@@ -1,0 +1,369 @@
+STUFF TO DO FOR NEXT PROJECT:
+
+use pipenv
+use test driven developement
+
+#############START UP PROCESS########################################
+PART 1
+
+ 1. create git repo for your new project
+
+ 2. create a pipenv (pipenv install django)
+
+#once inside your virtual env, you can check the version of a package with...
+python -m django --version
+
+# 3. to start a new django project...
+django-admin startproject <project_name>
+#######
+default django filesystem - this is all made automatically
+.
+├── django_project  #
+│   ├── __init__.py #empty file
+│   ├── settings.py #config file
+│   ├── urls.py     #set up mapping from urls to user
+│   └── wsgi.py     #api beteen python and the webserver
+└── manage.py #allows you to run command line commands
+#######
+#####################
+#4. start a new django app:
+       -cd into your django project file
+       -run the following:
+        python manage.py startapp <appname> #<-- creates a new app
+
+#create one called blog...
+python manage.py startapp blog
+#####################
+######################
+5. inside your newly created app folder, edit the views.py folder:
+       !views.py seems like some kind of 'sub-server' m.r.n.
+       !app 'destinatons are declared as fucntions which return
+       !http responses assembled in python and returned when they are called
+       !by the framework - example seen below
+
+def <location>(request):#function to gererete stuff for location in app
+    return HttpResponse(<generate http for response>) #create repsose fo loc
+*in the course, corey uses a simple return function for an example, but 
+*later, we'll use templates and stuff  
+####################
+PART 2
+
+########## APP CREATION PROCESS ###########################################
+
+django projects hold mutiple django apps - each one can be a different part of
+your web application
+#####################
+#4. start a new django app:
+       -cd into your django project file
+       -run the following:
+        python manage.py startapp <appname> #<-- creates a new app
+
+#create one called blog...
+python manage.py startapp blog
+#####################
+5. inside your newly created app folder, edit the views.py folder:
+       !views.py seems like some kind of 'sub-server' m.r.n.
+       !app 'destinatons are declared as fucntions which return
+       !http responses assembled in python and returned when they are called
+       !by the framework - example seen below
+
+def <location>(request):#function to gererete stuff for location in app
+    return HttpResponse(<generate http for response>) #create repsose fo loc
+
+####################
+#############
+6. inside your app folder, create and edit a file called urls.py
+from django.urls import path
+urlpatterns = [
+    path('', views.<location_function>, name='<app>-<loc>'),
+          ^ empty loc implies home
+    path('<loc>', views.<location_function>, name='<app>-<location>'),
+          ^ this is pattern for all subsequent locations in the app
+          !also, you dont need to add any app locations to the project urls.py
+          !that is automatically taken care of
+    #!add a path for each location in tha app to this list!
+] <--end of list
+                              #the '' string implys that this url is the 
+                              #'homepage of this app
+                              #the function is used return whatever http
+                              #request needed for the site location
+
+       ?^this is very similar to the global urls file in top file of your
+       ?django project
+       ?in fact, cory copy pastes from line 2 down into the new folder to 
+       ?use as a template:
+#############
+
+open ./blog/views.py
+
+add the following...
+from django.http import HttpResponse
+^this is used to return http responses when called
+
+def home(request):#this function returns a line of html code for a browser
+    return HttpResponse('<h1>Blog Home</h1>') #html for a browser to read
+^this small function demonstrates how HttpResponse takes html and creates
+an http response for a browser
+
+5:02
+#############
+6. inside your app folder, create and edit a file called urls.py
+from django.urls import path
+urlpatterns = [
+    path('', views.<location_function>, name='<app>-<loc>'),
+          ^ empty loc implies home
+    path('<loc>', views.<location_function>, name='<app>-<location>'),
+          ^ this is pattern for all subsequent locations in the app
+          !also, you dont need to add any app locations to the project urls.py
+          !that is automatically taken care of
+    #!add a path for each location in tha app to this list!
+] <--end of list
+                              #the '' string implys that this url is the 
+                              #'homepage of this app
+                              #the function is used return whatever http
+                              #request needed for the site location
+
+       ?^this is very similar to the global urls file in top file of your
+       ?django project
+       ?in fact, cory copy pastes from line 2 down into the new folder to 
+       ?use as a template:
+#############
+##################
+7. route traffic to the new app by adding the app's urls.py
+   to the django projects urls.py:
+   -add 'include' to the stuff you import from django.urls:
+       from django.urls import path, include
+   -add locations to the urlpatterns list:
+       urlpatterns = [
+               path('admin/', admin.site.urls),
+               path('<loc>/, include('<loc>.urls')),
+                          ^this slash is picks up both slash and no slash routes
+                           better to keep it in
+       ]
+
+##################
+####################
+ 8. test to make sure your new app's function works:
+       from django project dir:
+               python manage.py runserver
+       #the server will return some stuff including the url of the project
+       #if you just paste that in now, you will get a 404
+       #so you need to a /<location> for whatever location you're testing
+       http://127.0.0.1:8000/<location
+####################
+
+CHAPTER 3
+
+ 9. create a template directory inside your newley create app directory
+ 
+ _____ ___    ____   ___    
+|_   _/ _ \  |  _ \ / _ \ _ 
+  | || | | | | | | | | | (_)
+  | || |_| | | |_| | |_| |_ 
+  |_| \___/  |____/ \___/(_)
+                            
+                            learn how to use vim-surround
+                            add html skeleton file to toolbox
+                            add user-key for html skeleton to vim
+                            learn how to use nerdtree
+
+
+     _ _   _ _   _ _  __  ____  ____      ___        _______ ____  
+    | | | | | \ | | |/ / |  _ \|  _ \    / \ \      / / ____|  _ \ 
+ _  | | | | |  \| | ' /  | | | | |_) |  / _ \ \ /\ / /|  _| | |_) |
+| |_| | |_| | |\  | . \  | |_| |  _ <  / ___ \ V  V / | |___|  _ < 
+ \___/ \___/|_| \_|_|\_\ |____/|_| \_\/_/   \_\_/\_/  |_____|_| \_\
+                                                                   
+create a urls.py file in your new app directory...
+django_project/blog/urls.py
+
+this will behave similarily to the project urls file.
+
+we can copy stuff from the project urls file to start our new one
+from django.urls import path
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+you also need to import the views file from your working dir
+
+from . import views
+
+right now the above url pattern says 'admin/', admin.site.urls,
+but we need to change that to make the blog home page.
+
+path('', views.home, name='blog-home')
+     ^empty means this is the home path for 'blog'
+         ^this is what we're connecting to that path
+                     ^this is the name we're giving this pattern
+
+##################
+7. route traffic to the new app by adding the app's urls.py
+   to the django projects urls.py:
+   -add 'include' to the stuff you import from django.urls:
+       from django.urls import path, include
+   -add locations to the urlpatterns list:
+       urlpatterns = [
+               path('admin/', admin.site.urls),
+               path('<loc>/, include('<loc>.urls')),
+                          ^this slash is picks up both slash and no slash routes
+                           better to keep it in
+       ]
+
+##################
+
+after you add that you need to go back to django_project/urls.py
+
+to do this we need to import more stuff from django...
+from django.urls import path, include #all we added was ', include'
+
+now we can add the blog url pattern to django_projects/urls.py
+
+path('blog/', include('blog.urls')),
+
+#!!!!dont trip if perian data uses regex to match paths
+
+after you edit some stuff, you wont be able to go to the debug homepage
+
+ 11:30 we got it running
+
+####################
+ 8. test to make sure your new app's function works:
+       from django project dir:
+               python manage.py runserver
+       #the server will return some stuff including the url of the project
+       #if you just paste that in now, you will get a 404
+       #so you need to a /<location> for whatever location you're testing
+       http://127.0.0.1:8000/<location
+####################
+
+! the urls.py files reference branching site structures cleanly, the pattern
+  doesnt seem to change no matter how many layers you want to create
+  we'll create and test additional locations for 'blog' app
+
+  !!! to create a home page for the entire django project, create a path
+       in the django project's urls.py file with '' as its first argument
+       path('', include('<loc>'.urls')) #this will make the '<loc>' app
+       the 'home app' of the entire project. <loc>'s " '' path " will 
+       determine the home page for the entire django project
+
+END CHAPTER 2
+########################
+
+CHAPTER 3:
+
+ 9. open the views file in your blog app folder
+10. create a directory called templates inside your blog app directory
+11. create a directory called blog inside your newly created templates directory
+12. create 2 files: about.html and home.html
+13. insert html skeleton into the home.html
+14. add an indented line to the body section of home.html:
+	<h1>Blog Home!</h1>
+15. open apps.py inside blog app folder
+	-inside, a class has been declared called BlogConfig
+	 it inherits from AppConfig
+16. copy the name of that class to your clipboard
+17. open the settings.py file in your top file of your django project
+18. scroll down until you find the list 'INSTALLED_APPS'
+	add a string to the list:
+	'blog.apps.<pasteclassname>',
+19. go back go blog.views
+20. change the home function from returning an HttpResponse to returning a 
+    render:
+	return render(request, 'blog/home.html')
+21. test the new template by cd'ing to the project home dir and running:
+	pipenv shell
+	python manage.py runserver
+    -(paste ip into broweser)
+21. repeat the same process for the about.html
+	-open blog/templates/blog
+	-paste in html skeleton
+	-add <h1>About Page</h1> to body
+	-open blog.views and edit about function to match home
+
+*when django html templates seem to use python dicts to store values
+
+22. create some dummy data to simulate post data
+	-open blog views
+	-paste in the following:
+
+posts = [
+    {
+        'author': 'CoreyMS',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'August 27, 2018'
+    },
+    {
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'August 28, 2018'
+    }
+]
+
+23. assign posts to a variable within your home function
+    pass that variable as an argument into return render()
+
+BEFORE:
+
+def home(request):
+    return render(request, 'blog/home.html')
+
+AFTER:
+
+def home(request):
+    context = {
+            'posts': posts
+    }
+    return render(request, 'blog/home.html', context)
+
+24. have the home template file iterate over all items from the list 'posts'
+    which is passed in from djangos render function.
+    these will be listed out in one webpage
+    -
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+	{% for post in posts %} #<--ADDED
+		<h1>{{ post.title }}</h1> #<--ADDED
+		<p>By {{ post.author }} on {{ post.date_posted }}</p> #<--ADDED
+		<p>{{ post.content }}</p> #<--ADDED
+	{% endfor %} #<--ADDED
+</body>
+
+...then add an optional variable for the title for the header
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% if title %} #<--ADDED
+	<title>Django Blog - {{ title }}</title> #<--ADDED
+	{% else %} #<--ADDED
+	<title>Django Blog}</title> #<--ADDED
+	{% endif %} #<--ADDED
+</head>
+<body>
+	{% for post in posts %}
+		<h1>{{ post.title }}</h1>
+		<p>By {{ post.author }} on {{ post.date_posted }}</p>
+		<p>{{ post.content }}</p>
+	{% endfor %}
+</body>
+</html>
+
+25. add the optional title snippet to your about file as well
+
+26. add an optional arg to the about function to test thie optional title
+
+TIME - 20:00
+ _____ ___    ____   ___    
+|_   _/ _ \  |  _ \ / _ \ _ 
+  | || | | | | | | | | | (_)
+  | || |_| | | |_| | |_| |_ 
+  |_| \___/  |____/ \___/(_)
+                            
+                           finish chapter 3 
