@@ -1,0 +1,6 @@
+create a virtualenv file in working directory with:
+virtualenv <env_name>
+
+activate with:
+source /<path/to/env/dir>/bin/activate
+
