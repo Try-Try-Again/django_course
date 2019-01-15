@@ -4,4 +4,7 @@ virtualenv <env_name>
 activate with:
 source /<path/to/env/dir>/bin/activate
 
-CONTINUED ON PAGE 23
+when you run a python unit test, first check the bottom for what broke
+second check the top banner to see what test failed
+
+CONTINUED ON PAGE 44
