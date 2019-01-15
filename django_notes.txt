@@ -4,3 +4,4 @@ virtualenv <env_name>
 activate with:
 source /<path/to/env/dir>/bin/activate
 
+CONTINUED ON PAGE 23
