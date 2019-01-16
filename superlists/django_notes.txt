@@ -7,4 +7,4 @@ source /<path/to/env/dir>/bin/activate
 when you run a python unit test, first check the bottom for what broke
 second check the top banner to see what test failed
 
-CONTINUED ON PAGE 44
+CONTINUED ON PAGE 64 - got through the last edit to the function test
