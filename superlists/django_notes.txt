@@ -1,3 +1,8 @@
+#DONE: code smell list unit test POST test is too long?
+#DONE: we're saving an empty items with every request to the home page.
+#display multiple items in the table
+#support more that one list
+
 create a virtualenv file in working directory with:
 virtualenv <env_name>
 
@@ -7,4 +12,7 @@ source /<path/to/env/dir>/bin/activate
 when you run a python unit test, first check the bottom for what broke
 second check the top banner to see what test failed
 
-CONTINUED ON PAGE 64 - got through the last edit to the function test
+CONTINUED ON PAGE 80 - Recap
+
+next time through this book we need to compare before and after for each edit,
+and describe what changes occur and why
