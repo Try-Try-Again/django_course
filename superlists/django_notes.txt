@@ -2,6 +2,8 @@
 #DONE: we're saving an empty items with every request to the home page.
 #display multiple items in the table
 #support more that one list
+#clean up after FT runs
+#remove time.sleeps
 
 create a virtualenv file in working directory with:
 virtualenv <env_name>
